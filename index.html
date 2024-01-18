@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="/images/icon2.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="page designed to search photos by keywords to find inspiration">
+    <meta name="keywords" content="keywords, photo, photos, photography, inspire, search">
+    <title>Inspiration</title>
+  </head>
+  <body>
+    <header class="header">
+      <a href="index.html"><h1 class="header-logo">INSPIRATION</h1> </a>
+      <div class="div-search-input">
+        <form action="" id="search-form" class="search-form">
+          <input type="text" title="search" placeholder="search" name="input-text" id="input-text" class="input-text"/>
+          <button class="button-search" type="submit" form="search-form">
+            <img
+            class="search-icon"
+            src="/images/search-magnifier-magnifying-emoji-no-results-svgrepo-com.svg"
+            alt="icon for searching"
+           /></button>
+        </form>
+      </div>
+      <nav class="nav-bar-container">
+          <div class="divs div-explore"><p><a href="">Explore</a></p></div>
+          <div class="divs div-logIn"><p><a href="" class="log-in">Log In</a></p></div>
+          <div class="divs menu-element-with-list"> 
+            <img
+              class="menu-icon"
+              src="/images/menu-circle-svgrepo-com.svg"
+              alt="icon for menu">
+            </img>
+            <ul class="menu-list">
+              <li><a href="">About</a></li>
+              <li><a href="">Collections</a></li>
+              <li><a href="">Support</a></li>
+            </ul>
+          </div>
+      </nav>
+    </header>
+
+    <main class="main">
+      <div id="app" class="div-app"></div>
+      <button type="button" class="btn-show-more">Mostrar más</button>
+    </main>
+    <footer class="footer">
+      <p class="paragraph-footer">Created By Marta Ruiz. <q>Rain only affects those who are still dry</q></p>
+    </footer>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
