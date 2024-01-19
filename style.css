@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Quicksand:wght@400;500;700&family=Raleway:wght@100;300;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Zeyada&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+
 :root {
   /*variables para colores, espaciados, márgenes, tamaños, */
   --font-family: 'Raleway', sans-serif;
@@ -257,7 +258,7 @@ body {
   }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 970px) {
   .header {
     flex-direction: column;
     height: 150px;
