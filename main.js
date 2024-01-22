@@ -1,14 +1,7 @@
 import './style.css';
 import { searchImages } from './src/components/search-images.js/search';
 
-// const formSearch = document.querySelector('#search-form');
 const buttonShowMore = document.querySelector('.btn-show-more');
-
-// formSearch.addEventListener('submit', (e) => {
-//   e.preventDefault(); //previene que el formulario recargue la página
-//   page = 1;
-//   searchImages();
-// });
 
 document.addEventListener('DOMContentLoaded', () => {
   searchImages(); //se ejecuta cuando todo el HTML del documento ha sido completamente cargado

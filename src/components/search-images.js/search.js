@@ -4,7 +4,7 @@ const formSearch = document.querySelector('#search-form');
 let keyword = '';
 let page = 1;
 let perPage = 20;
-const apiKey = 'yzaUgjeSfPiVfdFIWwJuslWJNPB2C_NeswxhGbV9VsI';
+const apiKey = import.meta.env.VITE_ACCESS_KEY;
 
 export async function searchImages() {
   keyword = inputSearch.value;
