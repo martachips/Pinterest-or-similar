@@ -28,19 +28,33 @@ export async function searchImages() {
     }
 
     const results = data.results;
-    results.map((result) => {
-      const aImg = document.createElement('a');
-      const img = document.createElement('img');
-      aImg.classList.add('insp-img');
-      img.classList.add('image');
-      img.src = result.urls.small;
-      aImg.href = result.links.html;
-      aImg.target = '_blank';
 
-      aImg.appendChild(img);
-      divAppResults.appendChild(aImg);
-    });
-    page++;
+    if (results.length === 0) {
+      const imgNotFound = document.createElement('img');
+      divAppResults.appendChild(imgNotFound);
+      imgNotFound.src =
+        'https://i.pinimg.com/564x/12/bb/80/12bb80dc4852cab654f4ea52b42ef3dc.jpg';
+      imgNotFound.classList.add('img-not-found');
+      divAppResults.classList.remove('div-app');
+      divAppResults.classList.add('div-app-no-results');
+    } else {
+      divAppResults.classList.remove('div-app-no-results');
+      divAppResults.classList.add('div-app');
+
+      results.map((result) => {
+        const aImg = document.createElement('a');
+        const img = document.createElement('img');
+        aImg.classList.add('insp-img');
+        img.classList.add('image');
+        img.src = result.urls.small;
+        aImg.href = result.links.html;
+        aImg.target = '_blank';
+
+        aImg.appendChild(img);
+        divAppResults.appendChild(aImg);
+      });
+      page++;
+    }
   } catch (error) {
     console.error('Error:', error);
   }
