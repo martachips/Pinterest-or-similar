@@ -18,7 +18,7 @@ export async function searchImages() {
   try {
     const response = await fetch(apiUrlWithApiKey);
     if (!response.ok) {
-      throw new Error('Error en la solicitu: ${response.status}');
+      throw new Error(`Error en la solicitu: ${response.status}`);
     }
     const data = await response.json();
 
