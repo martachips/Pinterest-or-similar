@@ -67,15 +67,18 @@ export async function searchImages() {
 formSearch.addEventListener('submit', (e) => {
   e.preventDefault(); //previene que el formulario recargue la página
   page = 1;
+  if (main.querySelector('.div-app').classList === 'hidden') {
+    main.querySelector('.div-app').classList.remove('hidden');
+  }
   searchImages();
 });
 
 const showImage = (url) => {
   const photoFrame = createFrame(url);
   const btnShowMore = document.querySelector('.btn-show-more');
-  main.append(photoFrame);
-  divAppResults.classList.add('hidden');
+  main.querySelector('.div-app').classList.add('hidden');
   btnShowMore.classList.add('hidden');
+  main.append(photoFrame);
 };
 
 const createFrame = (url) => {
@@ -89,12 +92,12 @@ const createFrame = (url) => {
 
   backButton.addEventListener('click', () => {
     photoFrame.remove();
-    divAppResults.classList.remove('hidden');
+    main.querySelector('.div-app').classList.remove('hidden');
     btnShowMore.classList.remove('hidden');
   });
 
   const frame = document.createElement('div');
-  frame.classList.add('frame');
+  frame.classList.add('frame', 'frame-left');
 
   const selectedImage = document.createElement('img');
   selectedImage.classList.add('selected-image');
