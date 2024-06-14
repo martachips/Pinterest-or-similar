@@ -66,6 +66,7 @@
   height: 40px;
   width: 90px;
   font-family: var(--font-family);
+  background-color: #ece7e7;
 }
 
 .back-btn:hover,
