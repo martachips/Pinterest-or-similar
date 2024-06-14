@@ -1,3 +1,7 @@
+import html2canvas from 'html2canvas';
+import './search.css';
+
+const main = document.querySelector('.main');
 const inputSearch = document.querySelector('#input-text');
 const divAppResults = document.querySelector('.div-app');
 const formSearch = document.querySelector('#search-form');
@@ -41,17 +45,17 @@ export async function searchImages() {
       divAppResults.classList.remove('div-app-no-results');
       divAppResults.classList.add('div-app');
 
-      results.map((result) => {
-        const aImg = document.createElement('a');
+      results.forEach((result) => {
         const img = document.createElement('img');
-        aImg.classList.add('insp-img');
         img.classList.add('image');
         img.src = result.urls.small;
-        aImg.href = result.links.html;
-        aImg.target = '_blank';
+        img.dataset.large = result.urls.full;
 
-        aImg.appendChild(img);
-        divAppResults.appendChild(aImg);
+        img.addEventListener('click', () => {
+          showImage(result.urls.full);
+        });
+
+        divAppResults.appendChild(img);
       });
       page++;
     }
@@ -65,3 +69,104 @@ formSearch.addEventListener('submit', (e) => {
   page = 1;
   searchImages();
 });
+
+const showImage = (url) => {
+  const photoFrame = createFrame(url);
+  const btnShowMore = document.querySelector('.btn-show-more');
+  main.append(photoFrame);
+  divAppResults.classList.add('hidden');
+  btnShowMore.classList.add('hidden');
+};
+
+const createFrame = (url) => {
+  const btnShowMore = document.querySelector('.btn-show-more');
+  const photoFrame = document.createElement('article');
+  photoFrame.classList.add('photo-frame');
+
+  const backButton = document.createElement('button');
+  backButton.classList.add('back-btn');
+  backButton.textContent = 'Volver';
+
+  backButton.addEventListener('click', () => {
+    photoFrame.remove();
+    divAppResults.classList.remove('hidden');
+    btnShowMore.classList.remove('hidden');
+  });
+
+  const frame = document.createElement('div');
+  frame.classList.add('frame');
+
+  const selectedImage = document.createElement('img');
+  selectedImage.classList.add('selected-image');
+  selectedImage.src = url;
+  selectedImage.crossOrigin = 'Anonymous';
+
+  const imageText = document.createElement('textarea');
+  imageText.classList.add('image-text');
+  imageText.id = 'image-text';
+  imageText.maxLength = 200;
+  imageText.placeholder = 'Escribe un texto...máximo 200 caracteres';
+
+  const frameControls = document.createElement('div');
+  frameControls.classList.add('frame-controls');
+
+  const labelRight = document.createElement('label');
+  labelRight.classList.add('label-right');
+
+  const labelLeft = document.createElement('label');
+  labelLeft.classList.add('label-left');
+
+  const inputRight = document.createElement('input');
+  inputRight.type = 'radio';
+  inputRight.id = 'right-input';
+  inputRight.name = 'alignment';
+  inputRight.value = 'right';
+
+  const inputLeft = document.createElement('input');
+  inputLeft.type = 'radio';
+  inputLeft.id = 'left-input';
+  inputLeft.name = 'alignment';
+  inputLeft.value = 'left';
+  inputLeft.checked = true;
+
+  inputRight.addEventListener('change', () => {
+    frame.classList.remove('frame-left');
+    frame.classList.add('frame-right');
+  });
+  inputLeft.addEventListener('change', () => {
+    frame.classList.remove('frame-right');
+    frame.classList.add('frame-left');
+  });
+
+  const downloadButton = document.createElement('button');
+  downloadButton.classList.add('download-btn');
+  downloadButton.textContent = 'Descargar';
+
+  labelRight.append(inputRight, ' Derecha');
+  labelLeft.append(inputLeft, ' Izquierda');
+  frameControls.append(labelLeft, labelRight);
+  frame.append(selectedImage, imageText);
+  photoFrame.append(backButton, frame, frameControls, downloadButton);
+
+  downloadButton.addEventListener('click', () => {
+    downloadImg(frame);
+  });
+
+  return photoFrame;
+};
+
+const downloadImg = (element) => {
+  html2canvas(element, { useCORS: true })
+    .then((canvas) => {
+      const dataUrl = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = dataUrl;
+      link.download = 'image_with_text.png';
+      document.body.append(link);
+      link.click();
+      document.body.removeChild(link);
+    })
+    .catch((error) => {
+      console.error('Error capturing the frame: ', error);
+    });
+};
