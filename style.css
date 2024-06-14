@@ -231,6 +231,7 @@ body {
 .image {
   border-radius: var(--rtc-borderRadius);
   max-width: 100%;
+  cursor: pointer;
 }
 
 .div-app-no-results {
